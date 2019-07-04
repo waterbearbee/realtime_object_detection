@@ -81,13 +81,16 @@ def coco_classes():
         'scissors', 'teddy_bear', 'hair_drier', 'toothbrush'
     ]
 
+def dac_classes():
+    return ['foreground']
 
 dataset_aliases = {
     'voc': ['voc', 'pascal_voc', 'voc07', 'voc12'],
     'imagenet_det': ['det', 'imagenet_det', 'ilsvrc_det'],
     'imagenet_vid': ['vid', 'imagenet_vid', 'ilsvrc_vid'],
     'coco': ['coco', 'mscoco', 'ms_coco'],
-    'wider_face': ['WIDERFaceDataset', 'wider_face', 'WDIERFace']
+    'wider_face': ['WIDERFaceDataset', 'wider_face', 'WDIERFace'],
+    'dac': ['dac', 'dac_competition', 'DacDataset'],
 }
 
 
