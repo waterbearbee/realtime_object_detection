@@ -1,4 +1,4 @@
-# realtime_object_detection
+# Realtime_Object_Detection
 Codebase for realtime object detection
 
 **News**: With the help of this codebase, we win the second place in the [2019 DAC System Design Contest](http://www.cse.cuhk.edu.hk/~byu/2019-DAC-SDC/index.html).
