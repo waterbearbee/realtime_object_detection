@@ -1,2 +1,86 @@
-# realtime_object_detection
-codebase for realtime object detection
+# Realtime_object_detection
+Codebase for realtime object detection
+
+**News**: With the help of this codebase, we win the second place in the [2019 DAC System Design Contest](http://www.cse.cuhk.edu.hk/~byu/2019-DAC-SDC/index.html).
+
+## Introduction
+This codebase is modified based on [mmdetection](https://github.com/open-mmlab/mmdetection) 
+and the difference between them is that some two stage object detection algorithms are removed 
+and some small and compact backbones are added.
+
+The purpose of this codebase is to facilitate network quantization and pruning, 
+eventually applying deployment on different hardware devices.
+
+## Installation
+
+### Requirements
+
+- Linux
+- Python 3.5+ 
+- CUDA 9.0+
+- NCCL 2+
+- GCC 4.9+
+
+### Step by step installation
+
+a. Create a conda virtual environment and activate it. 
+```shell
+conda create -n realtime_object_detection python=3.7 -y
+source activate realtime_object_detection
+```
+b. Install some requirements.
+```shell
+pip install torch torchvision
+pip install cython
+```
+c. Clone the realtime_object_detection repository.
+
+```shell
+git clone https://github.com/waterbearbee/realtime_object_detection
+cd realtime_object_detection
+```
+
+d. Compile cuda extensions.
+
+```shell
+sh ./compile.sh
+```
+
+e. Install other dependencies.
+
+```shell
+python3 setup.py develop
+```
+
+## Getting Started
+
+### Training
+
+#### Train with a single GPU
+
+```shell
+python3 tools/train.py ${CONFIG_FILE} 
+```
+
+#### Train with multiple GPUs
+
+```shell
+./tools/dist_train.sh ${CONFIG_FILE} ${GPU_NUM} [optional arguments]
+```
+
+Optional arguments are:
+
+- `--validate` (**strongly recommended**): Perform evaluation at every k epochs during the training.
+- `--resume_from ${CHECKPOINT_FILE}`: Resume from a previous checkpoint file.
+
+### Testing
+
+#### Test with a single GPU
+```shell
+python3 tools/test.py ${CONFIG_FILE} ${CHECKPOINT_FILE} [--out ${RESULT_FILE}] --eval bbox 
+```
+
+#### Test with multiple GPUs
+```shell
+./tools/dist_test.sh ${CONFIG_FILE} ${CHECKPOINT_FILE} ${GPU_NUM} [--out ${RESULT_FILE}] --eval bbox
+```
