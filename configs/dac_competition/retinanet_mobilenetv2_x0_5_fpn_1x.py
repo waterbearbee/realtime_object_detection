@@ -1,14 +1,14 @@
 # model settings
 model = dict(
     type='RetinaNet',
-    pretrained='/home/xiongfeng/basemodels/mobilenetv2/mobilenetv2_0.5-eaa6f9ad.pth',
+    pretrained='/home/bearbee/basemodels/mobilenetv2/mobilenetv2_0.5-eaa6f9ad.pth',
     backbone=dict(
         type='MobileNetV2',
         width_mult=0.5,
         freeze_conv_at=2),
     neck=dict(
         type='FPN',
-        in_channels=[8, 8, 16, 40],
+        in_channels=[16, 16, 32, 160],
         out_channels=64,
         start_level=1,
         add_extra_convs=False,
@@ -51,7 +51,7 @@ test_cfg = dict(
     max_per_img=1)
 # dataset settings
 dataset_type = 'DacDataset'
-data_root = '/home/xiongfeng/dataset/'
+data_root = '/home/bearbee/dataset/'
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
 data = dict(
@@ -115,7 +115,7 @@ total_epochs = 12
 device_ids = range(8)
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
-work_dir = '/home/xiongfeng/work_dirs/dac_competition/retinanet_mobilenetv2_x0_5_fpn_1x'
+work_dir = '/home/bearbee/work_dirs/dac_competition/retinanet_mobilenetv2_x0_5_fpn_1x'
 load_from = None
 resume_from = None
 workflow = [('train', 1)]

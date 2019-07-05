@@ -1,7 +1,7 @@
 # model settings
 model = dict(
     type='RetinaNet',
-    pretrained='/home/xiongfeng/basemodels/shufflenetv2/shufflenetv2_x1.pth',
+    pretrained='/home/bearbee/basemodels/shufflenetv2/shufflenetv2_x1.pth',
     backbone=dict(
         type='ShuffleNetV2',
         stages_repeats=[4, 8, 4],
@@ -52,7 +52,7 @@ test_cfg = dict(
     max_per_img=1)
 # dataset settings
 dataset_type = 'DacDataset'
-data_root = '/home/xiongfeng/dataset/'
+data_root = '/home/bearbee/dataset/'
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
 data = dict(
@@ -116,7 +116,7 @@ total_epochs = 12
 device_ids = range(8)
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
-work_dir = '/home/xiongfeng/work_dirs/dac_competition/retinanet_shufflenetv2_x1_fpn_1x'
+work_dir = '/home/bearbee/work_dirs/dac_competition/retinanet_shufflenetv2_x1_fpn_1x'
 load_from = None
 resume_from = None
 workflow = [('train', 1)]

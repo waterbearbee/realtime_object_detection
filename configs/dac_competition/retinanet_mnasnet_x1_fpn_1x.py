@@ -1,14 +1,14 @@
 # model settings
 model = dict(
     type='RetinaNet',
-    pretrained='/home/bearbee/basemodels/mobilenetv2/mobilenetv2_0.25-b61d2159.pth',
+    pretrained='/home/bearbee/basemodels/mnasnet/mnasnet1.0_top1_73.512-f206786ef8.pth',
     backbone=dict(
-        type='MobileNetV2',
-        width_mult=0.25,
-        freeze_conv_at=2),
+        type='MNASNet',
+        alpha=1,
+        freeze_conv_at=8),
     neck=dict(
         type='FPN',
-        in_channels=[8, 8, 16, 80],
+        in_channels=[24, 40, 96, 320],
         out_channels=64,
         start_level=1,
         add_extra_convs=False,
@@ -115,7 +115,7 @@ total_epochs = 12
 device_ids = range(8)
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
-work_dir = '/home/bearbee/work_dirs/dac_competition/retinanet_mobilenetv2_x0_25_fpn_1x'
+work_dir = '/home/bearbee/work_dirs/dac_competition/retinanet_mnasnet_x1_fpn_1x'
 load_from = None
 resume_from = None
 workflow = [('train', 1)]
