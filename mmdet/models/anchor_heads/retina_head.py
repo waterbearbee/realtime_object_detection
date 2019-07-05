@@ -24,8 +24,9 @@ class RetinaHead(AnchorHead):
         self.scales_per_octave = scales_per_octave
         self.conv_cfg = conv_cfg
         self.norm_cfg = norm_cfg
-        octave_scales = np.array(
-            [2**(i / scales_per_octave) for i in range(scales_per_octave)])
+        # octave_scales = np.array(
+        #     [2**(i / scales_per_octave) for i in range(scales_per_octave)])
+        octave_scales = np.array(scales_per_octave)
         anchor_scales = octave_scales * octave_base_scale
         super(RetinaHead, self).__init__(
             num_classes, in_channels, anchor_scales=anchor_scales, **kwargs)

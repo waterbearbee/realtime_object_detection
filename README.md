@@ -65,13 +65,8 @@ python3 tools/train.py ${CONFIG_FILE}
 #### Train with multiple GPUs
 
 ```shell
-./tools/dist_train.sh ${CONFIG_FILE} ${GPU_NUM} [optional arguments]
+python3 -m torch.distributed.launch --nproc_per_node=${GPU_NUM} ${CONFIG_FILE} --launcher pytorch
 ```
-
-Optional arguments are:
-
-- `--validate` (**strongly recommended**): Perform evaluation at every k epochs during the training.
-- `--resume_from ${CHECKPOINT_FILE}`: Resume from a previous checkpoint file.
 
 ### Testing
 
@@ -82,5 +77,5 @@ python3 tools/test.py ${CONFIG_FILE} ${CHECKPOINT_FILE} [--out ${RESULT_FILE}] -
 
 #### Test with multiple GPUs
 ```shell
-./tools/dist_test.sh ${CONFIG_FILE} ${CHECKPOINT_FILE} ${GPU_NUM} [--out ${RESULT_FILE}] --eval bbox
+python3 -m torch.distributed.launch --nproc_per_node=${GPU_NUM} ${CONFIG_FILE} ${CHECKPOINT_FILE} --out ${RESULT_FILE} --eval bbox --launcher pytorch
 ```

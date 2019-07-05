@@ -1,27 +1,27 @@
 # model settings
 model = dict(
     type='RetinaNet',
-    pretrained='/home/xiongfeng/basemodels/mobilenet_v2-b0353104.pth',
+    pretrained='/home/xiongfeng/basemodels/mobilenetv2/mobilenet_v2-b0353104.pth',
     backbone=dict(
         type='MobileNetV2',
         freeze_conv_at=3),
     neck=dict(
         type='FPN',
         in_channels=[24, 32, 64, 1280],
-        out_channels=256,
+        out_channels=64,
         start_level=1,
-        add_extra_convs=True,
-        num_outs=5),
+        add_extra_convs=False,
+        num_outs=3),
     bbox_head=dict(
         type='RetinaHead',
         num_classes=2,
-        in_channels=256,
-        stacked_convs=4,
-        feat_channels=256,
+        in_channels=64,
+        stacked_convs=2,
+        feat_channels=64,
         octave_base_scale=4,
-        scales_per_octave=3,
-        anchor_ratios=[0.5, 1.0, 2.0],
-        anchor_strides=[8, 16, 32, 64, 128],
+        scales_per_octave=[2 ** (-3), 2 ** (-2), 2 ** (-1), 1],
+        anchor_ratios=[1.0, 2.0, 3.0, 4.0],
+        anchor_strides=[8, 16, 32],
         target_means=[.0, .0, .0, .0],
         target_stds=[1.0, 1.0, 1.0, 1.0],
         loss_cls=dict(
@@ -54,7 +54,7 @@ data_root = '/home/xiongfeng/dataset/'
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
 data = dict(
-    imgs_per_gpu=4,
+    imgs_per_gpu=16,
     workers_per_gpu=2,
     train=dict(
         type=dataset_type,
@@ -91,13 +91,13 @@ data = dict(
         with_label=False,
         test_mode=True))
 # optimizer
-optimizer = dict(type='SGD', lr=0.01, momentum=0.9, weight_decay=0.0001)
+optimizer = dict(type='SGD', lr=0.03, momentum=0.9, weight_decay=0.0001)
 optimizer_config = dict(grad_clip=dict(max_norm=35, norm_type=2))
 # learning policy
 lr_config = dict(
     policy='step',
     warmup='linear',
-    warmup_iters=500,
+    warmup_iters=1000,
     warmup_ratio=1.0 / 3,
     step=[8, 11])
 checkpoint_config = dict(interval=1)
