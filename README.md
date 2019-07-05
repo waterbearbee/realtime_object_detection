@@ -79,3 +79,13 @@ python3 tools/test.py ${CONFIG_FILE} ${CHECKPOINT_FILE} [--out ${RESULT_FILE}] -
 ```shell
 python3 -m torch.distributed.launch --nproc_per_node=${GPU_NUM} ${CONFIG_FILE} ${CHECKPOINT_FILE} --out ${RESULT_FILE} --eval bbox --launcher pytorch
 ```
+
+## DAC Competition Results (RetinaNet)
+
+|     Backbone       |   Neck  |   Head     |  box AP  |
+| :-----------------:| :-----: | :---------:| :------: | 
+|  MobileNetv2_x1_0  |  P3-P5  | 2conv(64c) |   3.4    |   
+|  MobileNetv2_x0_5  |  P3-P5  | 2conv(64c) |   5.3    |
+|  MobileNetv2_x0_25 |  P3-P5  | 2conv(64c) |   74.4   |
+|  ShuffleNetV2_x1_0 |  P3-P5  | 2conv(64c) |   73.0   |
+|  ShuffleNetV2_x0_5 |  P3-P5  | 2conv(64c) |   79.5   |
