@@ -59,33 +59,33 @@ python3 setup.py develop
 #### Train with a single GPU
 
 ```shell
-python3 tools/train.py ${CONFIG_FILE} 
+python3 ./tools/train.py ${CONFIG_FILE} 
 ```
 
 #### Train with multiple GPUs
 
 ```shell
-python3 -m torch.distributed.launch --nproc_per_node=${GPU_NUM} ${CONFIG_FILE} --launcher pytorch
+python3 -m torch.distributed.launch --nproc_per_node=${GPU_NUM} ./tools/train.py ${CONFIG_FILE} --launcher pytorch
 ```
 
 ### Testing
 
 #### Test with a single GPU
 ```shell
-python3 tools/test.py ${CONFIG_FILE} ${CHECKPOINT_FILE} [--out ${RESULT_FILE}] --eval bbox 
+python3 ./tools/test.py ${CONFIG_FILE} ${CHECKPOINT_FILE} [--out ${RESULT_FILE}] --eval bbox 
 ```
 
 #### Test with multiple GPUs
 ```shell
-python3 -m torch.distributed.launch --nproc_per_node=${GPU_NUM} ${CONFIG_FILE} ${CHECKPOINT_FILE} --out ${RESULT_FILE} --eval bbox --launcher pytorch
+python3 -m torch.distributed.launch --nproc_per_node=${GPU_NUM} ./tools/test.py ${CONFIG_FILE} ${CHECKPOINT_FILE} --out ${RESULT_FILE} --eval bbox --launcher pytorch
 ```
 
 ## DAC Competition Results (RetinaNet)
 
 |     Backbone       |   Neck  |   Head     |  box AP  |
 | :-----------------:| :-----: | :---------:| :------: | 
-|  MobileNetv2_x1_0  |  P3-P5  | 2conv(64c) |   3.4    |   
-|  MobileNetv2_x0_5  |  P3-P5  | 2conv(64c) |   5.3    |
+|  MobileNetv2_x1_0  |  P3-P5  | 2conv(64c) |   84.2   |   
+|  MobileNetv2_x0_5  |  P3-P5  | 2conv(64c) |   79.9   |
 |  MobileNetv2_x0_25 |  P3-P5  | 2conv(64c) |   74.4   |
-|  ShuffleNetV2_x1_0 |  P3-P5  | 2conv(64c) |   73.0   |
-|  ShuffleNetV2_x0_5 |  P3-P5  | 2conv(64c) |   79.5   |
+|  ShuffleNetV2_x1_0 |  P3-P5  | 2conv(64c) |   80.6   |
+|  ShuffleNetV2_x0_5 |  P3-P5  | 2conv(64c) |   75.0   |
